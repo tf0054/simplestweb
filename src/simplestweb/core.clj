@@ -18,5 +18,6 @@
        }))
 
 (defn -main [& args]
-  (run-server app {:port 8080})
-  (println (str "Server started. listen at localhost@8080")))
+  (let [port 80]
+    (run-server app {:port port})
+    (println (str "Server started. listen at localhost@" port))))
