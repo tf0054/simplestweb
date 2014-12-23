@@ -10,17 +10,17 @@
   (let [my-wdir (-> (java.io.File. ".") .getAbsolutePath)
         my-repo (p/load-repo (str my-wdir "/.git"))
         my-logs (map #(q/commit-info my-repo %) (p/git-log my-repo))]
-      {:status  200
-       :headers {"Content-Type" "text/html"}
-       :body    (str "<DIV STYLE=\"font-family: Consolas, Menlo, 'Liberation Mono', Courier, monospace;\">"
-                     "The log of the app stored at "
-                     (subs my-wdir 0 (- (.length my-wdir) 2))
-                     " is ...<br/><br/>"
-                     (string/join "<br/>" (map #(str (:id %) " - "
-                                                     (:time %) " - "
-                                                     (:message %)) my-logs))
-                     "</DIV>")
-       }))
+    {:status  200
+     :headers {"Content-Type" "text/html"}
+     :body    (str "<DIV STYLE=\"font-family: Consolas, Menlo, 'Liberation Mono', Courier, monospace;\">"
+                   "The log of the app stored at "
+                   (subs my-wdir 0 (- (.length my-wdir) 2))
+                   " is ...<br/><br/>"
+                   (string/join "<br/>" (map #(str (:id %) " - "
+                                                   (:time %) " - "
+                                                   (:message %)) my-logs))
+                   "</DIV>")
+     }))
 
 (defn -main [& args]
   (let [port 80]
